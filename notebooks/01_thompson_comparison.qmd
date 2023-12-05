@@ -1,0 +1,79 @@
+---
+title: "01 thompson comparison"
+author: "Sarah Lundregan"
+format: html
+code-fold: true
+date: today
+---
+
+```{r}
+#| output: false
+library(cowplot)
+library(tidyverse)
+#library(matrixStats)
+#library(DiffBind)
+#library(RColorBrewer)
+#library(reshape2)
+#library(ChIPseeker)
+```
+
+# Re-CHIP
+44389 consensus peaks were called in both 2h_FLAG_chip1_nanog_chip2 replicates, using macs2 with narrow peak option and q-value cut off of 0.01
+After subtracting any consensus peaks called in both 0h_FLAG_chip1_nanog_chip2 replicates, 44313 consensus peaks remained
+
+
+## Overlap with Alba's Sox2-Gata6 cobound peaks in DP KOSR cells
+Venn diagrams were produced using the [intervene](https://intervene.readthedocs.io/en/latest/introduction.html) package.
+See helper script `01_intervene.sh` in the scripts folder.
+
+```{r}
+#| label: fig-venn_alba_cobound_peak_thompson_rechip_Nanog_overlap
+#| fig-cap: Overlap between Alba's KOSR DP Sox2-Gata6 cobound peaks and Thompson 2h rechip Nanog-Gata6 peaks. 85% of KOSR DP Sox2-Gata6 cobound peaks in Thompson rechip peakset
+#| layout-ncol: 1
+knitr::include_graphics("../results/01_intervene/alba_cobound_sox2_gata6_thompson_2h_chip2_nanog/Intervene_venn_1.png")
+```
+
+
+```{r}
+#| label: fig-venn_alba_cobound_peak_thompson_chip1_Gata6_overlap
+#| fig-cap: Overlap between Alba's KOSR DP Gata6 peaks and Thompson 2h rechip Nanog-Gata6 peaks. 70% of KOSR DP Gata6 peaks in Thompson rechip peakset
+#| layout-ncol: 1
+knitr::include_graphics("../results/01_intervene/alba_KOSR_DP_gata6_thompson_2h_chip2_nanog/Intervene_venn_3.png")
+```
+
+
+```{r}
+#| label: fig-venn_thompson_chip1_gata6_thompson_chip2_nanog_overlap
+#| fig-cap: Overlap between Thompson 2h chip1 Gata6 peaks and Thompson 2h rechip Nanog-Gata6 peaks. 52% overlap
+#| layout-ncol: 1 
+knitr::include_graphics("../results/01_intervene/thompson_2h_FLAG_chip1_gata6_thompson_2h_chip2_nanog/Intervene_venn_4.png")
+```
+
+
+## Re-chip peak enrichment at Alba's pluri, common, and PrE enhancers
+This heatmap was produced using deeptools. See helper scripts `01_deeptools_matrix_rechip_alba_enhancers.sh` and `01_deeptools_plot_rechip_alba_enhancers.sh` in scripts folder.
+```{r}
+#| label: fig-venn_rechip_peak_enrichment
+#| fig-cap: Some enrichment of re-chip peaks at pluri, common, and PrE enhancers defined by Alba
+#| layout-ncol: 1
+knitr::include_graphics("../results/01_thompson_rechip/deeptools/01_Gata6_Nanog_rechip_on_pluri_common_nEnd.png")
+```
+
+## Motif analysis rechip
+Homer results under riveiro_et_al_2023/results/01_thompson_rechip/motif_analysis/. See helper script `01_homer_rechip_alba_enhancers.sh`
+<br>
+<br>
+Both 2h chip1 FLAG Gata6 and 2h re-CHIP Nanog have Gata motifs at top. More Sox motifs in top results for 2h Nanog re-CHIP, and Nanog motifs in top.
+
+
+# Cut&run in E3.5 blastocysts
+
+## Overlap with Alba's cobound peaks
+```{r}
+#| label: fig-venn_alba_cobound_peak_overlap_e3-5_blastocysts
+#| fig-cap: Overlap between Alba's KOSR DP cobound Sox2-Gata6 peaks and Thompson cobound Gata6-Nanog peaks in E3.5 blastocysts. 48% of Alba's cobound peaks overlap with Thompson cobound peaks in blastocysts.
+#| layout-ncol: 1
+knitr::include_graphics("../results/01_intervene/alba_cobound_sox2_gata6_thompson_blasto_gata6_nanog/Intervene_venn2.png")
+```
+
+
