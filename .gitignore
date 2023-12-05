@@ -10,3 +10,5 @@ metadata.yml
 .ipynb_checkpoints/
 .quarto/
 .cruft.json
+
+/.quarto/
